@@ -11,7 +11,7 @@
    <form action="" method="post" novalidate class="shadow p-5">
       {% if messages %}
           {% for message in messages %}
-            <p {% if messages.tags %} class="alert alert-{{messages.tags}}">
+            <p {% if messages.tags %} class="alert alert-{{messages.tags}} " {% endif %}>
                {{message}}<p>
           {% endfor %}
       {% endif %}
@@ -34,7 +34,6 @@
            <p class="alert alert-danger my-3">{{error}}</p>
         {% endfor %}
       {% endif %}
-    {{form}}
    </form>
   </div>
  </div>

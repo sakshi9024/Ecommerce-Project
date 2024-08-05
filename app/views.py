@@ -58,7 +58,7 @@ def change_password(request):
 def mobile(request,data=None):
   if data == None:
     mobiles = Products.objects.filter(category='M')
-  elif data=='Lenovo' or data=='Samsung':
+  elif data=='Redmi' or data=='Samsung':
       mobiles = Products.objects.filter(category='M').filter(brand=data)
   elif data == 'below':
       mobiles = Products.objects.filter(category='M').filter(discount_price__lt=10000)
@@ -68,8 +68,8 @@ def mobile(request,data=None):
   return render(request, 'app/mobile.html',{'mobiles':mobiles}) 
 
 
-def customerregistration(request):
- return render(request, 'app/customerregistration.html')
+# def customerregistration(request):
+#  return render(request, 'app/customerregistration.html')
 
 def checkout(request):
  return render(request, 'app/checkout.html')
