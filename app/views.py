@@ -1,5 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views import View
+from django.contrib.auth import logout
 from .models import Customer, Products , Cart, Order_Details   
 from .forms import CustomerRegistrationForm 
 from django.contrib import messages
@@ -28,7 +29,7 @@ class CustomerRegistration(View):
     if form.is_valid():
       messages.success(request,'Congratulation!! Registered Successfully')
       form.save()
-    return render (request,'customerregistration.html',{'form':form})
+    return render (request,'app/customerregistration.html',{'form':form})
 
 
 # def home(request):
@@ -52,8 +53,6 @@ def address(request):
 def orders(request):
  return render(request, 'app/orders.html')
 
-def change_password(request):
- return render(request, 'app/changepassword.html')
 
 def mobile(request,data=None):
   if data == None:
@@ -70,6 +69,10 @@ def mobile(request,data=None):
 
 # def customerregistration(request):
 #  return render(request, 'app/customerregistration.html')
+
+def logouthandle(request):
+  logout(request)
+  return redirect('/')
 
 def checkout(request):
  return render(request, 'app/checkout.html')
