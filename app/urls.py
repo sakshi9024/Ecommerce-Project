@@ -3,7 +3,7 @@ from app import views
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.auth import views as auth_views
-from .forms import LoginForm, MyPasswordChangeForm, MyPasswordResetForm
+from .forms import LoginForm, MyPasswordChangeForm, MyPasswordResetForm, MySetPassword
 urlpatterns = [
     path('', views.ProductView.as_view(), name='home'),
     path('product_detail/<int:id>/',views.ProductDetail.as_view(), name='product_detail'),
@@ -15,10 +15,13 @@ urlpatterns = [
     path('logout/',views.logouthandle, name='logout'),
     path('passwordchange/',auth_views.PasswordChangeView.as_view(template_name ='app/passwordchange.html', form_class=MyPasswordChangeForm, success_url ='/passwordchangedone/'),name='passwordchange'),
     path('passwordchangedone/',auth_views.PasswordChangeView.as_view(template_name = 'app/passwordchangedone.html'), name ='passwordchangedone'),
-    path('password-reset/',auth_views.PasswordResetView.as_view(template_name='app/passwordreset.html' , form_class = MyPasswordResetForm ),name='password_reset'),
+    path('password-reset/',auth_views.PasswordResetView.as_view(template_name='app/passwordreset.html', form_class = MyPasswordResetForm ),name='password_reset'),
+    path('password-reset/done',auth_views.PasswordResetDoneView.as_view(template_name='app/password_reset_done.html'),name = 'password_reset_done'),
+    path('password-reset-confirm/<uidb64>/<token>',auth_views.PasswordResetConfirmView.as_view(template_name='app/password-reset-confirm.html' , form_class = MySetPassword),name='password-reset-confirm'),
+    path('password-reset/complete',auth_views.PasswordResetCompleteView.as_view(template_name='app/password_reset_complete.html'),name = 'password_reset_complete'),
     path('cart/', views.add_to_cart, name='add-to-cart'),
     path('buy/', views.buy_now, name='buy-now'),
-    path('profile/', views.profile, name='profile'),
+    path('profile/', views.Profile.as_view(), name='profile'),
     path('address/', views.address, name='address'),
     path('orders/', views.orders, name='orders'),
     path('checkout/', views.checkout, name='checkout'),
