@@ -68,6 +68,7 @@ def mobile(request,data=None):
 class Profile(View):
   def get(self, request):
     form = CustomerProfileForm()
+    print(form,"formmmm")
     return render(request,'app/profile.html',{'form': form})
   
 
