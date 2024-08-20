@@ -80,7 +80,6 @@ def mobile(request,data=None):
 class Profile(View):
   def get(self, request):
     form = CustomerProfileForm()
-<<<<<<< HEAD
     return render(request,'app/profile.html',{'form': form, 'active':'btn-primary'})
   
   def post(self,request):
@@ -98,11 +97,6 @@ class Profile(View):
       return render(request,'app/profile.html',{'form':form , 'active': 'btn-primary'})
         
 
-
-=======
-    print(form,"formmmm")
-    return render(request,'app/profile.html',{'form': form})
->>>>>>> c25a83c36737114484308f4bfd658f0e3f51b5de
   
 
 # def customerregistration(request):
