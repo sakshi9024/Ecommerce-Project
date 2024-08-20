@@ -44,13 +44,15 @@ def add_to_cart(request):
    product_id = request.POST['prod-id']
    print(product_id, "This is our product id")
    product = Products.objects.get(id =product_id)
-   print(product)
-   return redirect('/cart')
+   quantity = 1
+   Cart(user=user,products=product,quantity=quantity).save()
+   return redirect('/cart/')
+   
 
-# def show_cart(request):
-#   user = request.user
-#   cart = Cart.objects.filter(user=user)
-#   return render(request,'app/add_to_cart.html',{'carts':cart})
+
+def show_cart(request):
+  data = Cart.objects.filter(user=request.user)
+  return render(request,'app/add_to_cart.html',{'carts':data})
 
 def buy_now(request):
  return render(request, 'app/buynow.html')
@@ -80,7 +82,6 @@ def mobile(request,data=None):
 class Profile(View):
   def get(self, request):
     form = CustomerProfileForm()
-<<<<<<< HEAD
     return render(request,'app/profile.html',{'form': form, 'active':'btn-primary'})
   
   def post(self,request):
@@ -95,14 +96,10 @@ class Profile(View):
         reg = Customer(user=usr,name=name, locality=locality,city=city,state=state,zipcode=zipcode)
         reg.save()
         messages.success(request, "Congratulations!! profile updated successfully")
-      return render(request,'app/profile.html',{'form':form , 'active': 'btn-primary'})
-        
+        return render(request,'app/profile.html',{'form':form , 'active': 'btn-primary'})
+    
+      return render(request,'app/profile.html',{'form': form})
 
-
-=======
-    print(form,"formmmm")
-    return render(request,'app/profile.html',{'form': form})
->>>>>>> c25a83c36737114484308f4bfd658f0e3f51b5de
   
 
 # def customerregistration(request):

@@ -64,7 +64,7 @@ class Products(models.Model):
     category = models.CharField(choices=Product_Category,max_length=2)
 
     def __str__(self):
-       return str(self.id)
+       return str(self.title)
 
 
 class Cart(models.Model):
