@@ -18,8 +18,11 @@ urlpatterns = [
     path('password-reset/',auth_views.PasswordResetView.as_view(template_name='app/passwordreset.html', form_class = MyPasswordResetForm ),name='password_reset'),
     path('password-reset/done',auth_views.PasswordResetDoneView.as_view(template_name='app/password_reset_done.html'),name = 'password_reset_done'),
     path('password-reset-confirm/<uidb64>/<token>',auth_views.PasswordResetConfirmView.as_view(template_name='app/password_reset_confirm.html' , form_class = MySetPassword),name='password_reset_confirm'),
+<<<<<<< HEAD
     path('password-reset-confirm/<uidb64>/<token>/',auth_views.PasswordResetConfirmView.as_view(template_name='app/password_reset_confirm.html' , form_class = MySetPassword),name='password_reset_confirm'),
     path('password-reset-confirm/<uidb64>/<token>/',auth_views.PasswordResetConfirmView.as_view(template_name='app/password_reset_confirm.html' , form_class = MySetPassword),name='password_reset_confirm'),
+=======
+>>>>>>> 2d970d7bf16a3affe421d7be02f0022186001eb3
     path('password-reset/complete',auth_views.PasswordResetCompleteView.as_view(template_name='app/password_reset_complete.html'),name = 'password_reset_complete'),
     path('buy/', views.buy_now, name='buy-now'),
     path('profile/', views.Profile.as_view(), name='profile'),
