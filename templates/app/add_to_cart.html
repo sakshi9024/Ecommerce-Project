@@ -26,7 +26,7 @@
                   <a class="plus-cart btn" pid ="{{cart.products.id}}"><i class="fas fa-plus-square fa-lg"></i></a>
                 </div>
                 <div class="d-flex justify-content-between">
-                  <a href="#" class="btn btn-sm btn-secondary mr-3" pid = "{{cart.products.id}}">Remove item </a>
+                  <a href="#" class="btn btn-sm btn-secondary mr-3 remove-cart" pid = "{{cart.products.id}}">Remove item </a>
                   <p class="mb-0"><span><strong>{{cart.products.discount_price}}</strong></span></p>
                 </div>
               </div>
@@ -71,4 +71,62 @@
     </div>
   </div>
 </div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+
+  $('.plus-cart').click(function () {
+    console.log("This is plus button")
+    var id = $(this).attr("pid").toString();
+    var eml = this.parentNode.children[2];
+    $.ajax({
+        type: "GET",
+        url: "/pluscart",
+        data: { prod_id: id },
+        success: function (data) {
+            eml.innerText = data.quantity;
+            document.getElementById('amount').innerText = data.amount;
+            document.getElementById('totalamount').innerText = data.totalamount;
+        }
+    });
+});
+
+$('.minus-cart').click(function () {
+    var id = $(this).attr("pid").toString();
+    var eml = this.parentNode.children[2]
+    // console.log(id)
+    $.ajax({
+        type:"GET",
+        url:"/minuscart",
+        data: {prod_id : id},
+        success: function(data){
+            eml.innerText = data.quantity
+            document.getElementById('amount').innerText = data.amount
+            document.getElementById('totalamount').innerText = data.totalamount
+            data.totalamount
+        }
+
+    })
+})
+
+$('.remove-cart').click(function () {
+    var id = $(this).attr("pid").toString();
+    var eml = this
+    // console.log(id)
+    $.ajax({
+        type:"GET",
+        url:"/removecart",
+        data: {prod_id : id
+
+        },
+        success: function(data){
+            document.getElementById('amount').innerText = data.amount
+            document.getElementById('totalamount').innerText = data.totalamount
+            data.totalamount
+            eml.parentNode.parentNode.parentNode.parentNode.remove()
+        }
+
+    })
+})
+</script>
 {% endblock main-content %}
