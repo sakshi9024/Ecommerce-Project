@@ -64,7 +64,7 @@ class Products(models.Model):
     category = models.CharField(choices=Product_Category,max_length=2)
 
     def __str__(self):
-       return str(self.id)
+       return str(self.title)
 
 
 class Cart(models.Model):
@@ -74,6 +74,10 @@ class Cart(models.Model):
 
     def __str__(self):
        return str(self.id)
+    
+    @property
+    def total_cost(self):
+        return self.quantity * self.products.discount_price
 
 
 Order_Status = (
@@ -85,7 +89,7 @@ Order_Status = (
    
 )
 
-class Order_Details(models.Model):
+class OrderPlaced(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
     product = models.ForeignKey(Products, on_delete=models.CASCADE)
@@ -93,7 +97,8 @@ class Order_Details(models.Model):
     ordered_date = models.DateTimeField(auto_now_add=True)
     status = models.CharField(choices=Order_Status, default='Pending', max_length=50)
 
-    def __str__(self):
-        return(self.id)
+    @property
+    def total_cost(self):
+        return self.quantity * self.product.discount_price
 
 

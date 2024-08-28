@@ -14,6 +14,6 @@ class ProductAdmin(admin.ModelAdmin):
 class CartAdmin(admin.ModelAdmin):
     list_display = ["id","user","products","quantity"]
 
-@admin.register(Order_Details)
+@admin.register(OrderPlaced)
 class OrderAdmin(admin.ModelAdmin):
     list_display = ["id","user","customer","product","quantity","ordered_date","status"]
